@@ -1,12 +1,21 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Card, Button } from "react-bootstrap";
+import { connect } from "react-redux";
+import {
+  addToFavoritesAction,
+  removeFromFavoritesAction,
+} from "../redux/actions";
 
-export default function CardResult(props) {
+const mapStateToProps = (state) => state;
+
+
+const CardResult = (props) => {
   let { company, company_logo, id } = props.result;
   return (
     <>
       <Card>
-        <Card.Img variant="top" src={{ company_logo }} />
+        <Card.Img variant="top" src={company_logo} />
         <Card.Body>
           <Card.Title>{company}</Card.Title>
           <Card.Text>Brief description job</Card.Text>
@@ -15,9 +24,15 @@ export default function CardResult(props) {
           <Link to={`/${id}`}>
             <Button variant="info">More details</Button>
           </Link>
+          <Button onClick={props.addToFavoritesAction(props.result)} variant="success">Add to Favorites</Button>
           <small className="text-muted">Last updated 3 mins ago</small>
         </Card.Footer>
       </Card>
     </>
   );
 }
+
+export default connect(
+  null,
+  { addToFavoritesAction }
+)(CardResult);

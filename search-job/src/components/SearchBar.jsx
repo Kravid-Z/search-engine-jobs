@@ -1,42 +1,38 @@
 import React, { Component } from "react";
-import {
-  Navbar,
-  Form,
-  Button,
-  Jumbotron,
-  Container,
-  FormControl,
-} from "react-bootstrap";
+import { Navbar, Form, Button, Jumbotron, Container } from "react-bootstrap";
 // import {
 //     fetchUserSearch,
 // } from "../redux/asyncActions.js";
 
 export default class SearchBar extends Component {
   state = {
-    inputLocation: "",
-    inputDesiredPosition: "",
+    location: "",
+    position: "",
   };
 
   updateInput = (e) => {
-    let id = e.target.id;
-    this.setState({
-      ...this.state,
-      [id]: e.target.value,
-    });
+    const { name, value } = e.target;
+    this.setState({ [name]: value });
+    // let id = e.target.id;
+    // this.setState({
+    //   ...this.state,
+    //   [id]: e.target.value,
+    // });
   };
 
   handleSearch = async (e) => {
     e.preventDefault();
-    if ((this.state.inputDesiredPosition && this.state.inputLocation) !== "") {
+    if (this.state.position && this.state.location) {
       try {
-        let description = this.state.inputDesiredPosition;
-        let location = this.state.inputLocation;
+        let description = this.state.position;
+        let location = this.state.location;
         const response = await fetch(
           `https://strive-proxy.herokuapp.com/https://jobs.github.com/positions.json?description=${description}&location=${location}`
         );
         const results = await response.json();
-        this.props.getResults({ results });
+        this.props.getResults(results);
       } catch (error) {
+        console.log(error)
         window.alert("Sorry something wrong with the fetch");
       }
     } else {
@@ -58,23 +54,21 @@ export default class SearchBar extends Component {
         </Jumbotron>
         <Navbar bg="dark" variant="dark">
           <Navbar.Brand href="#home">NomadJobs!</Navbar.Brand>
-          <Form inline onSubmit={this.handleSearch()}>
-            <FormControl
-              id="location"
+          <Form inline onSubmit={this.handleSearch}>
+            <Form.Control
+              name="location"
               style={{ minWidth: "30vw" }}
-              type="text"
+              type="search"
               placeholder="Location"
               onChange={this.updateInput}
-              value={this.state.inputLocation}
               className="mr-sm-2"
             />
-            <FormControl
-              id="position"
+            <Form.Control
+              name="position"
               style={{ minWidth: "30vw" }}
-              type="text"
+              type="search"
               placeholder="Desired position"
               onChange={this.updateInput}
-              value={this.state.inputDesiredPosition}
               className="mr-sm-2"
             />
             <Button type="submit" variant="outline-info">

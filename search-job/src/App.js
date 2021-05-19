@@ -6,11 +6,11 @@ import { Component } from "react";
 
 export default class App extends Component {
   state = {
-    results : []
+    results: [],
   };
   getResults = (usersearch) => {
-    this.set.state({results: usersearch})
-  }
+    this.setState({ results: usersearch });
+  };
   render() {
     return (
       <Router>
@@ -18,7 +18,9 @@ export default class App extends Component {
         <Route
           path="/"
           exact
-          render={(routerProps) => <Home {...routerProps} results={this.state.results} />}
+          render={(routerProps) => (
+            <Home {...routerProps} results={this.state.results} />
+          )}
         />
         <Route
           path="/details"

@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import searchInput from "./searchInput.js";
 import fetchJobs from "./fetchJobs.js";
+import favorites from "./favorites.js";
 
-export default combineReducers({ searchInput, fetchJobs });
+export default combineReducers({fetchJobs, favorites });
