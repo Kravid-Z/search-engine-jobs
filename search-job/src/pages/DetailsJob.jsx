@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import DisplayDetailsJob from "../components/DisplayDetailsJob.jsx"
+import DisplayDetailsJob from "../components/DisplayDetailsJob.jsx";
 
 export class DetailsJob extends Component {
   state = {
@@ -9,16 +9,14 @@ export class DetailsJob extends Component {
   componentDidMount() {
     this.getJobDetails();
   }
-  componentDidUpdate(){
-
-  }
+  componentDidUpdate() {}
 
   getJobDetails = async () => {
     const response = await fetch(
       `https://strive-proxy.herokuapp.com/https://jobs.github.com/positions/${this.props.match.params.jobId}.json`
     );
     const data = await response.json();
-    console.log(data)
+    console.log(data);
 
     this.setState({ jobDetails: data });
   };
@@ -26,7 +24,7 @@ export class DetailsJob extends Component {
   render() {
     return (
       <>
-      <DisplayDetailsJob jobDetails={this.state.jobDetails}/>
+        <DisplayDetailsJob jobDetails={this.state.jobDetails} />
       </>
     );
   }
