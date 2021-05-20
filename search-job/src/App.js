@@ -5,22 +5,14 @@ import SearchBar from "../src/components/SearchBar.jsx";
 import { Component } from "react";
 
 export default class App extends Component {
-  state = {
-    results: [],
-  };
-  getResults = (usersearch) => {
-    this.setState({ results: usersearch });
-  };
   render() {
     return (
       <Router>
-        <SearchBar getResults={this.getResults} />
+        <SearchBar />
         <Route
           path="/"
           exact
-          render={(routerProps) => (
-            <Home {...routerProps} results={this.state.results} />
-          )}
+          render={(routerProps) => <Home {...routerProps} />}
         />
         <Route
           path="/details/:jobId"

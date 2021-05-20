@@ -52,7 +52,7 @@ const mapStateToProps = state => state
         <Jumbotron fluid className="my-0 niceImage hero">
           <Container className="px-0">
             <h1 className="font-weight-bold text-monospace">NomadJobs!</h1>
-            <p className="px-2">
+            <p className="font-weight-bold text-monospace">
               Find the JOB you want{" "}
               <FaLocationArrow style={{ color: " #17A2B8" }} />{" "}
               <Button

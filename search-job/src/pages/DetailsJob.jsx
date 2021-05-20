@@ -9,12 +9,16 @@ export class DetailsJob extends Component {
   componentDidMount() {
     this.getJobDetails();
   }
+  componentDidUpdate(){
+
+  }
 
   getJobDetails = async () => {
     const response = await fetch(
       `https://strive-proxy.herokuapp.com/https://jobs.github.com/positions/${this.props.match.params.jobId}.json`
     );
     const data = await response.json();
+    console.log(data)
 
     this.setState({ jobDetails: data });
   };
