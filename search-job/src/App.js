@@ -23,7 +23,7 @@ export default class App extends Component {
           )}
         />
         <Route
-          path="/details"
+          path="/details/:jobId"
           exact
           render={(routerProps) => <DetailsJob {...routerProps} />}
         />

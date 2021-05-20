@@ -4,7 +4,7 @@ import {Container} from "react-bootstrap"
 export default class Home extends Component {
   render() {
     return (
-      <Container className="mx-3">
+      <Container className="text-center">
         <DisplayResults results={this.props.results}/>
       </Container>
     );

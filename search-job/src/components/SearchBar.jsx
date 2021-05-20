@@ -1,10 +1,15 @@
 import React, { Component } from "react";
 import { Navbar, Form, Button, Jumbotron, Container } from "react-bootstrap";
-// import {
-//     fetchUserSearch,
-// } from "../redux/asyncActions.js";
+import "../index.css";
+import { FaLocationArrow } from "react-icons/fa";
+import { connect } from "react-redux";
+import {
+    fetchUserSearch,
+} from "../redux/asyncActions.js";
 
-export default class SearchBar extends Component {
+const mapStateToProps = state => state
+
+ class SearchBar extends Component {
   state = {
     location: "",
     position: "",
@@ -23,32 +28,39 @@ export default class SearchBar extends Component {
   handleSearch = async (e) => {
     e.preventDefault();
     if (this.state.position && this.state.location) {
-      try {
-        let description = this.state.position;
-        let location = this.state.location;
-        const response = await fetch(
-          `https://strive-proxy.herokuapp.com/https://jobs.github.com/positions.json?description=${description}&location=${location}`
-        );
-        const results = await response.json();
-        this.props.getResults(results);
-      } catch (error) {
-        console.log(error)
-        window.alert("Sorry something wrong with the fetch");
-      }
-    } else {
-      window.alert("Please add location and position before search");
-    }
-  };
+      this.props.fetchUserSearch(this.state.location, this.state.position)
+    //   try {
+    //     let description = this.state.position;
+    //     let location = this.state.location;
+    //     const response = await fetch(
+    //       `https://strive-proxy.herokuapp.com/https://jobs.github.com/positions.json?description=${description}&location=${location}`
+    //     );
+    //     const results = await response.json();
+    //     this.props.getResults(results);
+    //   } catch (error) {
+    //     console.log(error);
+    //     window.alert("Sorry something wrong with the fetch");
+    //   }
+    // } else {
+    //   window.alert("Please add location and position before search");
+    // }
+  }}
 
   render() {
     return (
       <>
-        <Jumbotron fluid className="my-0">
+        <Jumbotron fluid className="my-0 niceImage hero">
           <Container className="px-0">
-            <h1>NomadJobs!</h1>
-            <p>Find the JOB you want.</p>
-            <p>
-              <Button variant="primary">Subscribe to our newsletter Job</Button>
+            <h1 className="font-weight-bold text-monospace">NomadJobs!</h1>
+            <p className="px-2">
+              Find the JOB you want{" "}
+              <FaLocationArrow style={{ color: " #17A2B8" }} />{" "}
+              <Button
+                variant="outline-info"
+                className="font-weight-bold text-monospace"
+              >
+                Subscribe to our newsletter Job
+              </Button>
             </p>
           </Container>
         </Jumbotron>
@@ -80,3 +92,5 @@ export default class SearchBar extends Component {
     );
   }
 }
+
+export default connect(mapStateToProps, {fetchUserSearch})(SearchBar);

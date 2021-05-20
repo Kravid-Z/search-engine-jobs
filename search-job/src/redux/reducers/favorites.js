@@ -4,12 +4,12 @@ const initialState = {
   favorites: [],
 };
 
-const mainReducer = (state = initialState, action) => {
+const favoritesReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_TO_FAVORITES:
       return {
         ...state,
-        favorites: state.favorites.concat(action.payload),
+        favorites: [...state.favorites, action.payload],
       };
     case DELETE_FROM_FAVORITES:
       return {
@@ -21,4 +21,4 @@ const mainReducer = (state = initialState, action) => {
   }
 };
 
-export default mainReducer;
+export default favoritesReducer;

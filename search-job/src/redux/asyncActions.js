@@ -4,11 +4,11 @@ import {
   FETCH_USER_FAILURE,
 } from "./actionTypes";
 
-export const fetchUserSearch = async (dispatch, getState, {POSITION, LOCATION}) => {
-  try {
+export const fetchUserSearch =  (location, positition) => {
+  return async (dispatch, getState) =>{try {
     dispatch({ type: FETCH_USER_SEARCH });
     let resp = await fetch(
-      `https://striveschool-api.herokuapp.com/api/jobs?description=${POSITION}&location=${LOCATION}`
+      `https://striveschool-api.herokuapp.com/api/jobs?description=${location}&location=${positition}`
     );
     let results = await resp.json();
     if (resp.ok) {
@@ -18,5 +18,5 @@ export const fetchUserSearch = async (dispatch, getState, {POSITION, LOCATION}) 
     }
   } catch (error) {
     dispatch({ type: FETCH_USER_FAILURE, payload: error });
-  }
+  }}
 };

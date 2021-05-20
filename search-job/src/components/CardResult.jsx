@@ -6,9 +6,11 @@ import {
   addToFavoritesAction,
   removeFromFavoritesAction,
 } from "../redux/actions";
+import { MdFavorite, MdFavoriteBorder } from "react-icons/md";
+
+// MdFavorite, MdFavoriteBorder
 
 const mapStateToProps = (state) => state;
-
 
 const CardResult = (props) => {
   let { company, company_logo, id } = props.result;
@@ -21,18 +23,20 @@ const CardResult = (props) => {
           <Card.Text>Brief description job</Card.Text>
         </Card.Body>
         <Card.Footer>
-          <Link to={`/${id}`}>
+          <Link to={`/details/${id}`}>
             <Button variant="info">More details</Button>
           </Link>
-          <Button onClick={props.addToFavoritesAction(props.result)} variant="success">Add to Favorites</Button>
+          <Button
+            onClick={() => props.addToFavoritesAction(props.result)}
+            variant="success"
+          >
+            <MdFavorite /> <MdFavoriteBorder />
+          </Button>
           <small className="text-muted">Last updated 3 mins ago</small>
         </Card.Footer>
       </Card>
     </>
   );
-}
+};
 
-export default connect(
-  null,
-  { addToFavoritesAction }
-)(CardResult);
+export default connect(null, { addToFavoritesAction })(CardResult);

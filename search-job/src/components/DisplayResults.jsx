@@ -6,10 +6,10 @@ export default function DisplayResults(props) {
   return (
     <>
       <Row>
-        {props.results ? (
-          <h2>Results</h2>
+        {props.results[0] ? (
+          <h2 className="py-3 font-weight-bold text-monospace">Results</h2>
         ) : (
-          <h2>Where to start? Try juniorFrontend in China</h2>
+          <h2 className="py-3 font-weight-bold text-monospace">Where to start? Try juniorFrontend in China</h2>
         )}
         <CardGroup>
           {props.results.map((result) => (

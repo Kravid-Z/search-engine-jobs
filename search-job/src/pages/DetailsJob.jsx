@@ -1,11 +1,31 @@
-import React from "react";
+import React, { Component } from "react";
+import DisplayDetailsJob from "../components/DisplayDetailsJob.jsx"
 
-function DetailsJob() {
-  return (
-    <>
-      <h1>Here will be the details for this Job</h1>
-    </>
-  );
+export class DetailsJob extends Component {
+  state = {
+    jobDetails: null,
+  };
+
+  componentDidMount() {
+    this.getJobDetails();
+  }
+
+  getJobDetails = async () => {
+    const response = await fetch(
+      `https://strive-proxy.herokuapp.com/https://jobs.github.com/positions/${this.props.match.params.jobId}.json`
+    );
+    const data = await response.json();
+
+    this.setState({ jobDetails: data });
+  };
+
+  render() {
+    return (
+      <>
+      <DisplayDetailsJob jobDetails={this.state.jobDetails}/>
+      </>
+    );
+  }
 }
 
 export default DetailsJob;
