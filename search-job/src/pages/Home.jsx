@@ -10,7 +10,7 @@ class Home extends Component {
     console.log(this.props)
     return (
       <Container className="text-center">
-        <DisplayResults results={this.props.searchReducer.results}/>
+        <DisplayResults />
       </Container>
     );
   }

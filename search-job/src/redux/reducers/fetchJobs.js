@@ -2,12 +2,14 @@ import {
   FETCH_USER_SEARCH,
   FETCH_USER_SUCCESS,
   FETCH_USER_FAILURE,
+  FETCH_USER_NO_RESULTS
 } from "../actionTypes.js";
 
 const initialState = {
   loading: false,
   results: [],
   error: "",
+  mssg: "",
 };
 
 const searchReducer = (state = initialState, action) => {
@@ -24,6 +26,16 @@ const searchReducer = (state = initialState, action) => {
         loading: false,
         results: action.payload,
         error: "",
+        mssg: "success",
+      };
+    }
+    case FETCH_USER_NO_RESULTS: {
+      return {
+        ...state,
+        loading: false,
+        results: [],
+        error: "",
+        mssg: action.payload,
       };
     }
     case FETCH_USER_FAILURE: {
@@ -37,6 +49,6 @@ const searchReducer = (state = initialState, action) => {
     default:
       return state;
   }
-}
+};
 
-export default searchReducer
+export default searchReducer;
