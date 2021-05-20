@@ -6,11 +6,11 @@ import {
 
 const initialState = {
   loading: false,
-  data: [],
+  results: [],
   error: "",
 };
 
-export default function (state = initialState, action) {
+const searchReducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_USER_SEARCH: {
       return {
@@ -22,7 +22,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         loading: false,
-        data: action.payload,
+        results: action.payload,
         error: "",
       };
     }
@@ -30,7 +30,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         loading: false,
-        data: [],
+        results: [],
         error: action.payload,
       };
     }
@@ -38,3 +38,5 @@ export default function (state = initialState, action) {
       return state;
   }
 }
+
+export default searchReducer
